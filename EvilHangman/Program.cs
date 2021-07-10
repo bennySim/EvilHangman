@@ -11,13 +11,52 @@ namespace EvilHangman
         {
             var game = new Game(FileWithWords);
             var word = game.Start();
-            Console.WriteLine(string.Join(" ", word));
-            while (word.Any(c => c == '_'))
+            PrintWord(word);
+            var isGameOver = false;
+            while (word.Any(c => c == '_') && !isGameOver)
             {
-                char c = (char) Console.Read();
-                word = game.Guess(c);
-                Console.WriteLine(string.Join(" ", word));
+                GuessLetter(game, out word);
+                CheckGameOver(game, out isGameOver);
+                PrintWord(word);
             }
+            Console.WriteLine("Congrats, you won!");
+        }
+
+        private static void PrintWord(char[] word)
+        {
+            Console.WriteLine(string.Join(" ", word));
+        }
+
+        private static void CheckGameOver(Game game, out bool isGameOver)
+        {
+            if (game.IsGameOver)
+            {
+                Console.WriteLine("You failed! Game over.");
+                isGameOver = true;
+            }
+
+            isGameOver = false;
+        }
+
+        private static void GuessLetter(Game game, out char[] word)
+        {
+            var c = GetChar();
+            var isGoodGuess = game.Guess(c, out word);
+            if (!isGoodGuess)
+            {
+                Console.WriteLine($"Letter '{c}' is not in the word!");
+            }
+            else
+            {
+                Console.WriteLine($"Perfect! Letter '{c}' is in the word!");
+            }
+        }
+
+        private static char GetChar()
+        {
+            var c = (char) Console.Read();
+            Console.ReadLine();
+            return c;
         }
     }
 }

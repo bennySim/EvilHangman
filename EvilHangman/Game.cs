@@ -7,10 +7,11 @@ namespace EvilHangman
 {
     public class Game
     {
-        public uint Score { get; } = 0;
+        public uint Score { get; set; } = 5;
         private readonly Dictionary<int, List<Word>> _words;
         private List<Word> _currentPossibleWords;
         private char[] _currentWord;
+        public bool IsGameOver { get; private set; } = false;
 
         public Game(string wordsFile)
         {
@@ -36,7 +37,7 @@ namespace EvilHangman
             return _currentWord;
         }
 
-        public char[] Guess(char c)
+        public bool Guess(char c, out char[] currentWord)
         {
             _currentPossibleWords = _currentPossibleWords
                 .GroupBy(w => w.HashAccordingToChar(c))
@@ -44,13 +45,37 @@ namespace EvilHangman
                 .First()
                 .ToList();
 
-            _currentPossibleWords
-                .First()
-                .GetIndicesOfChar(c)
-                .ForEach(index => _currentWord[index] = c);
+            var numOfFilledChars = FillUncoveredChars(c);
+            
+            UpdateScore(numOfFilledChars);
+            
+            currentWord = _currentWord;
 
-            return _currentWord;
+            return numOfFilledChars > 0;
         }
+
+        private int FillUncoveredChars(char c)
+        {
+            var indices = _currentPossibleWords
+                .First()
+                .GetIndicesOfChar(c);
+            indices.ForEach(index => _currentWord[index] = c);
+            return indices.Count;
+        }
+
+        private void UpdateScore(int numOfFilledChars)
+        {
+            if (numOfFilledChars == 0)
+            {
+                Score--;
+            }
+
+            if (Score == 0)
+            {
+                IsGameOver = true;
+            }
+        }
+
 
         private void InitializePossibleWords(out int length)
         {
