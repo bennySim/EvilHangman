@@ -1,66 +1,38 @@
-using System;
 using System.Linq;
+using EvilHangman.Input;
+using EvilHangman.Output;
 
 namespace EvilHangman
 {
     public class GameCLI
     {
-        public void Start(string wordsFileName)
+        private IOutput _output;
+        private IInput _input;
+        private GameLogic _game;
+
+        public void Start(string wordsFileName, IOutput output, IInput input)
         {
-            var game = new GameLogic(wordsFileName);
-            var word = game.Init();
-            var isGameOver = false;
-            while (word.Any(c => c == '_') && !isGameOver)
+            _output = output;
+            _input = input;
+            _game = new GameLogic(wordsFileName);
+            var word = _game.Init();
+
+            while (word.Any(c => c == '_') && !_game.IsGameOver)
             {
-                PrintWord(word);
-                GuessLetter(game, out word);
-                CheckGameOver(game, out isGameOver);
+                _output.PrintWord(word);
+                GuessLetter(out word);
             }
 
-            if (!isGameOver)
-            {
-                Console.WriteLine("Congrats, you won!");
-            }
+            _output.PrintGameEnd(_game.IsGameOver);
         }
 
-
-        private static void PrintWord(char[] word)
+        private void GuessLetter(out char[] word)
         {
-            Console.WriteLine(string.Join(" ", word));
+            var c = _input.GetChar();
+            var isGoodGuess = _game.Guess(c, out word);
+            _output.PrintResultOfGuess(isGoodGuess, c);
         }
 
-        private static void CheckGameOver(GameLogic gameLogic, out bool isGameOver)
-        {
-            if (gameLogic.IsGameOver)
-            {
-                Console.WriteLine("You failed! Game over.");
-                isGameOver = true;
-            }
-            else
-            {
-                isGameOver = false;
-            }
-        }
-
-        private static void GuessLetter(GameLogic gameLogic, out char[] word)
-        {
-            var c = GetChar();
-            var isGoodGuess = gameLogic.Guess(c, out word);
-            if (!isGoodGuess)
-            {
-                Console.WriteLine($"Letter '{c}' is not in the word!");
-            }
-            else
-            {
-                Console.WriteLine($"Perfect! Letter '{c}' is in the word!");
-            }
-        }
-
-        private static char GetChar()
-        {
-            var c = (char) Console.Read();
-            Console.ReadLine();
-            return c;
-        }
+       
     }
 }

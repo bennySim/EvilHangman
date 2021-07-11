@@ -7,7 +7,7 @@ namespace EvilHangman
 {
     public class GameLogic
     {
-        public uint Score { get; set; } = 5;
+        private uint Score { get; set; } = 5;
         private readonly Dictionary<int, List<Word>> _words;
         private List<Word> _currentPossibleWords;
         private char[] _currentWord;

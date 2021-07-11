@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using EvilHangman.Input;
+using EvilHangman.Output;
 
 namespace EvilHangman
 {
@@ -9,7 +9,7 @@ namespace EvilHangman
 
         static void Main(string[] args)
         {
-            new GameCLI().Start(FileWithWords);
+            new GameCLI().Start(FileWithWords, new ConsoleOutput(), new ConsoleInput());
         }
 
     }
