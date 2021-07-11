@@ -23,7 +23,7 @@ namespace EvilHangman
                 GuessLetter(out word);
             }
 
-            _output.PrintGameEnd(_game.IsGameOver);
+            _output.PrintGameEnd(!_game.IsGameOver);
         }
 
         private void GuessLetter(out char[] word)
