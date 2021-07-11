@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EvilHangman
 {
-    public class Game
+    public class GameLogic
     {
         public uint Score { get; set; } = 5;
         private readonly Dictionary<int, List<Word>> _words;
@@ -13,7 +13,7 @@ namespace EvilHangman
         private char[] _currentWord;
         public bool IsGameOver { get; private set; } = false;
 
-        public Game(string wordsFile)
+        public GameLogic(string wordsFile)
         {
             _words = ProcessFileIntoWords(wordsFile);
         }
@@ -30,7 +30,9 @@ namespace EvilHangman
                     g => g.Select(w => new Word(w)).ToList());
         }
 
-        public char[] Start()
+    
+
+        public char[] Init()
         {
             InitializePossibleWords(out var length);
             _currentWord = Enumerable.Repeat('_', length).ToArray();
@@ -46,13 +48,14 @@ namespace EvilHangman
                 .ToList();
 
             var numOfFilledChars = FillUncoveredChars(c);
-            
+
             UpdateScore(numOfFilledChars);
-            
+
             currentWord = _currentWord;
 
             return numOfFilledChars > 0;
         }
+
 
         private int FillUncoveredChars(char c)
         {
