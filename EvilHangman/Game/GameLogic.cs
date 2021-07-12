@@ -18,7 +18,6 @@ namespace EvilHangman
             _words = ProcessFileIntoWords(wordsFile);
         }
 
-
         private static Dictionary<int, List<Word>> ProcessFileIntoWords(string file)
         {
             return File
@@ -29,8 +28,6 @@ namespace EvilHangman
                 .ToDictionary(g => g.Key,
                     g => g.Select(w => new Word(w)).ToList());
         }
-
-    
 
         public char[] Init()
         {
@@ -56,6 +53,7 @@ namespace EvilHangman
             return numOfFilledChars > 0;
         }
 
+        public string GetGuessedWord() => !IsGameOver ? null : _currentPossibleWords.First().Name;
 
         private int FillUncoveredChars(char c)
         {
@@ -78,7 +76,6 @@ namespace EvilHangman
                 IsGameOver = true;
             }
         }
-
 
         private void InitializePossibleWords(out int length)
         {

@@ -4,7 +4,7 @@ namespace EvilHangman.Output
     {
         public void PrintWinMessage();
 
-        public void PrintGameOverMessage();
+        public void PrintGameOverMessage(string word);
 
         public void PrintGoodGuessMessage(char c);
 
@@ -12,9 +12,7 @@ namespace EvilHangman.Output
 
         public void PrintWord(char[] word);
 
-
-
-        public void PrintGameEnd(bool isWin);
+        public void PrintGameEnd(bool isWin, string word);
 
         public void PrintResultOfGuess(bool isGoodGuess, char c);
     }

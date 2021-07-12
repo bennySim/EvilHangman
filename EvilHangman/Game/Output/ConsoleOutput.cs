@@ -9,9 +9,9 @@ namespace EvilHangman.Output
             Console.WriteLine("Congrats, you won!");
         }
 
-        public void PrintGameOverMessage()
+        public void PrintGameOverMessage(string word)
         {
-            Console.WriteLine("You failed! Game over.");
+            Console.WriteLine($"You failed! Game over. Word is {word}");
         }
 
         public void PrintGoodGuessMessage(char c)
@@ -31,7 +31,7 @@ namespace EvilHangman.Output
 
      
 
-        public void PrintGameEnd(bool isWin)
+        public void PrintGameEnd(bool isWin, string word)
         {
             if (isWin)
             {
@@ -39,7 +39,7 @@ namespace EvilHangman.Output
             }
             else
             {
-                PrintGameOverMessage();
+                PrintGameOverMessage(word);
             }
         }
 

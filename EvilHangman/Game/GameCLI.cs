@@ -23,7 +23,7 @@ namespace EvilHangman
                 GuessLetter(out word);
             }
 
-            _output.PrintGameEnd(!_game.IsGameOver);
+            _output.PrintGameEnd(!_game.IsGameOver, _game.GetGuessedWord());
         }
 
         private void GuessLetter(out char[] word)
@@ -32,7 +32,6 @@ namespace EvilHangman
             var isGoodGuess = _game.Guess(c, out word);
             _output.PrintResultOfGuess(isGoodGuess, c);
         }
-
        
     }
 }
