@@ -9,7 +9,7 @@ namespace EvilHangman
 
         static void Main(string[] args)
         {
-            new GameCLI().Start(FileWithWords, new ConsoleOutput(), new ConsoleInput());
+            new GameCLI(FileWithWords, new ConsoleOutput(), new ConsoleInput()).Start();
         }
 
     }

@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace EvilHangman
@@ -8,32 +6,14 @@ namespace EvilHangman
     public class GameLogic
     {
         private uint Score { get; set; } = 5;
-        private readonly Dictionary<int, List<Word>> _words;
         private List<Word> _currentPossibleWords;
-        private char[] _currentWord;
+        public char[] CurrentWord { get; }
         public bool IsGameOver { get; private set; } = false;
 
-        public GameLogic(string wordsFile)
+        public GameLogic(List<Word> possibleWords, int length)
         {
-            _words = ProcessFileIntoWords(wordsFile);
-        }
-
-        private static Dictionary<int, List<Word>> ProcessFileIntoWords(string file)
-        {
-            return File
-                .ReadAllLines(file)
-                .Select(w => w.ToLower())
-                .GroupBy(w => w.Length)
-                .Where(g => g.Key > 3)
-                .ToDictionary(g => g.Key,
-                    g => g.Select(w => new Word(w)).ToList());
-        }
-
-        public char[] Init()
-        {
-            InitializePossibleWords(out var length);
-            _currentWord = Enumerable.Repeat('_', length).ToArray();
-            return _currentWord;
+            _currentPossibleWords = possibleWords;
+            CurrentWord = Enumerable.Repeat('_', length).ToArray();
         }
 
         public bool Guess(char c, out char[] currentWord)
@@ -48,7 +28,7 @@ namespace EvilHangman
 
             UpdateScore(numOfFilledChars);
 
-            currentWord = _currentWord;
+            currentWord = CurrentWord;
 
             return numOfFilledChars > 0;
         }
@@ -60,7 +40,7 @@ namespace EvilHangman
             var indices = _currentPossibleWords
                 .First()
                 .GetIndicesOfChar(c);
-            indices.ForEach(index => _currentWord[index] = c);
+            indices.ForEach(index => CurrentWord[index] = c);
             return indices.Count;
         }
 
@@ -75,14 +55,6 @@ namespace EvilHangman
             {
                 IsGameOver = true;
             }
-        }
-
-        private void InitializePossibleWords(out int length)
-        {
-            var lengths = _words.Keys.ToList();
-            var randomLengthIndex = new Random().Next(0, lengths.Count);
-            length = lengths[randomLengthIndex];
-            _currentPossibleWords = _words[length];
         }
     }
 }
