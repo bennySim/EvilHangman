@@ -1,4 +1,4 @@
-namespace EvilHangman.Output
+namespace EvilHangman.IO
 {
     public interface IOutput
     {
