@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using EvilHangman.Input;
-using EvilHangman.Output;
+using EvilHangman.IO;
 
 namespace EvilHangman
 {

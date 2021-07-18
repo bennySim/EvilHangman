@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilHangman", "EvilHangman\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{812472A0-56E5-43A2-8E58-754E2C17189F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EvilHangmanCLI", "EvilHangmanCLI\EvilHangmanCLI.csproj", "{FBEA843A-32B9-4826-9E44-E6D460546382}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{812472A0-56E5-43A2-8E58-754E2C17189F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{812472A0-56E5-43A2-8E58-754E2C17189F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{812472A0-56E5-43A2-8E58-754E2C17189F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBEA843A-32B9-4826-9E44-E6D460546382}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBEA843A-32B9-4826-9E44-E6D460546382}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBEA843A-32B9-4826-9E44-E6D460546382}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBEA843A-32B9-4826-9E44-E6D460546382}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using EvilHangman.IO;
 
-namespace EvilHangman.Input
+namespace EvilHangmanCLI.IO
 {
     public class ConsoleInput : IInput
     {

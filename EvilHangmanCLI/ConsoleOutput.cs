@@ -1,6 +1,7 @@
 using System;
+using EvilHangman.IO;
 
-namespace EvilHangman.Output
+namespace EvilHangmanCLI.IO
 {
     public class ConsoleOutput : IOutput
     {
