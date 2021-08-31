@@ -1,4 +1,3 @@
-using System;
 using EvilHangman;
 using Xunit;
 
