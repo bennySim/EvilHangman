@@ -5,10 +5,11 @@ namespace EvilHangman
 {
     public class GameLogic
     {
-        private uint Score { get; set; } = 5;
+        public uint Score { get; private set; } = 5;
         private List<Word> _currentPossibleWords;
         public char[] CurrentWord { get; }
         public bool IsGameOver { get; private set; } = false;
+        public List<char> UsedLetters { get; } = new();
 
         public GameLogic(List<Word> possibleWords, int length)
         {
@@ -18,6 +19,7 @@ namespace EvilHangman
 
         public bool Guess(char c, out char[] currentWord)
         {
+            UsedLetters.Add(c);
             _currentPossibleWords = _currentPossibleWords
                 .GroupBy(w => w.HashAccordingToChar(c))
                 .OrderByDescending(g => g.Count())

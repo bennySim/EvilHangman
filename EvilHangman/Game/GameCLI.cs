@@ -36,6 +36,8 @@ namespace EvilHangman
 
             while (word.Any(c => c == '_') && !_game.IsGameOver)
             {
+                _output.PrintNumOfLeftGuesses(_game.Score);
+                _output.PrintUsedLetters(_game.UsedLetters);
                 _output.PrintWord(word);
                 GuessLetter(out word);
             }

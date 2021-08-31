@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace EvilHangman.IO
 {
     public interface IOutput
@@ -15,5 +17,9 @@ namespace EvilHangman.IO
         public void PrintGameEnd(bool isWin, string word);
 
         public void PrintResultOfGuess(bool isGoodGuess, char c);
+        
+        public void PrintNumOfLeftGuesses(uint numLeftGuesses);
+
+        public void PrintUsedLetters(IEnumerable<char> guessedLetters);
     }
 }

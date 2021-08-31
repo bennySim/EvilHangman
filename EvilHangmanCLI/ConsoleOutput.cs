@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using EvilHangman.IO;
 
 namespace EvilHangmanCLI.IO
@@ -30,8 +31,6 @@ namespace EvilHangmanCLI.IO
             Console.WriteLine(string.Join(" ", word));
         }
 
-     
-
         public void PrintGameEnd(bool isWin, string word)
         {
             if (isWin)
@@ -54,6 +53,16 @@ namespace EvilHangmanCLI.IO
             {
                 PrintGoodGuessMessage(c);
             }
+        }
+
+        public void PrintNumOfLeftGuesses(uint numLeftGuesses)
+        {
+            Console.WriteLine($"You have {numLeftGuesses} guesses left.");
+        }
+
+        public void PrintUsedLetters(IEnumerable<char> guessedLetters)
+        {
+            Console.WriteLine($"Used letters: {string.Join(", ", guessedLetters)}");
         }
     }
 }
